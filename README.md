@@ -1,6 +1,6 @@
 # Riff
 
-| A musical game that tests your ability to play a "riff".
+> A musical game that tests your ability to play "riffs"
 
 Record a riff and see how well you or someone else can play it.
 
