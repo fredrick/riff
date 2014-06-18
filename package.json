@@ -1,0 +1,21 @@
+{
+  "name": "riff",
+  "version": "0.0.0",
+  "description": "Catch and play musical riffs",
+  "main": "index.js",
+  "dependencies": {
+    "express": ">= 4.4.x",
+    "socket.io": ">= 1.0.x",
+    "midi": ">= 0.8.x",
+    "gauss": "latest"
+  },
+  "devDependencies": {
+      "vows": "latest"
+  },
+  "scripts": {
+    "start": "node index.js 9000",
+    "test": "vows test/*"
+  },
+  "author": "",
+  "license": "MIT/X11"
+}
