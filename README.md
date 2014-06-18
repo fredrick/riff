@@ -24,4 +24,4 @@ $ npm install
 
 ### Recording a riff
 
-By default Riff can be accessed at [http://localhost:9000](http://localhost:9000). Riff will create a [MIDI](http://en.wikipedia.org/wiki/MIDI) input device labeled "Riff" that you can attach an instrument to. Record a riff from any instrument that supports MIDI and performances will be graded against that recording.
+By default Riff can be accessed at [http://localhost:9000](http://localhost:9000). Riff will create a [MIDI](http://en.wikipedia.org/wiki/MIDI) input device labeled "Riff" that you can attach an instrument to. Riff can then capture any MIDI instrument and grade performances.
