@@ -15,15 +15,53 @@
   <link rel="stylesheet" href="stylesheets/style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1 id="riff" class="text-center">Riff</h1>
+  <div id="wrap">
+    <div class="container">
+      <h2 id="riff" class="text-center">Riff</h2>
+    </div>
+  </div>
+
+  <div id="footer">
+    <div class="container">
+      <h2 id="replay" class="text-center">Replay</h2>
+    </div>
   </div>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script>
     (function($) {
-      var socket = io.connect('/');
+      var socket = io.connect('/'),
+          recording = false,
+          replaying = false;
+      socket.on('ping', function(ping) {
+        socket.emit('pong', true);
+        console.log('Handshake completed')
+      });
+
+      $('#riff').click(function() {
+        recording = !recording;
+        socket.emit('record', recording);
+
+        if (recording) {
+          $(this).text('Recording');
+        }
+        else {
+          $(this).text('Riff');
+        }
+      });
+
+      $('#replay').click(function() {
+        replaying = !replaying;
+        socket.emit('replay', replaying);
+
+        if (replaying) {
+          $(this).text('Replaying');
+        }
+        else {
+          $(this).text('Replay');
+        }
+      });
     })(jQuery);
   </script>
 </body>

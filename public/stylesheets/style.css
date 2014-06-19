@@ -3,17 +3,40 @@
  * style.css
  */
 
+html,
 body {
-  background: #A71D3A;;
+  background: #F8235F;
+  height: 100%;
 }
 
-h1 {
-  color: #EEE;
+#wrap {
+  min-height: 100%;
+  height: auto;
+  margin: 0 auto -350px;
+  padding: 0 0 350px;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+  height: 350px;
+  background-color: #00E0B9;
+}
+
+h2 {
+  color: #FFF;
   cursor: pointer;
   font-family: "edoregular";
-  font-size: 8em;
+  font-size: 6em;
 }
 
-h1:hover {
-  color: #CCC;
+h2:hover {
+  color: #DDD;
+}
+
+h2#replay {
+  color: #852466;
+}
+
+h2:hover#replay {
+  color: #6B1D52;
 }

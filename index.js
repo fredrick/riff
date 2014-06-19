@@ -3,12 +3,13 @@ var express = require('express'),
     server = require('http').Server(app),
     io = require('socket.io')(server),
     midi = require('midi'),
-    gauss = require('gauss');
+    gauss = require('gauss'),
+    Score = require('./lib/riff').Score;
 
-var riff = {
-      capture: false
-    },
-    song = [],
+var song = [],
+    score = new Score(song),
+    recording = false,
+    replaying = false,
     input = new midi.input();
 
 app.use("/", express.static(__dirname + '/public'));
@@ -17,8 +18,12 @@ app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
 });
 
-app.get('/riff', function(req, res) {
-  res.send(riff);
+app.get('/status', function(req, res) {
+  res.send({
+    'recording': recording,
+    'replaying': replaying,
+    'score': score.update()
+  });
 });
 
 app.get('/song', function(req, res) {
@@ -28,24 +33,39 @@ app.get('/song', function(req, res) {
 input.openVirtualPort('Riff');
 
 io.on('connection', function (socket) {
+  socket.emit('ping', true);
+
   input.on('message', function(deltaTime, message) {
     var note = [deltaTime, message];
-    if (riff.capture) {
+    if (recording) {
       song.append(note);
+      socket.emit('note', note);
     }
-    socket.emit('note', note);
+    else if (replaying) {
+      socket.emit('score', score.update(note));
+    }
   });
 
-  socket.on('hello', function(data) {
-    
-  });
-
-  socket.on('capture', function(data) {
-    riff.capture = !riff.capture;
-    if (riff.capture) {
+  socket.on('record', function(data) {
+    recording = data;
+    if (recording) {
       song = [];
+      console.log('Recording started');
     }
-    console.log('capture received');
+    else {
+      console.log('Recording stopped');
+    }
+  });
+
+  socket.on('replay', function(data) {
+    replaying = data;
+    if (replaying) {
+      score = new Score(song);
+      console.log('Replaying started');
+    }
+    else {
+      console.log('Replaying stopped');
+    }
   });
 });
 
