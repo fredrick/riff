@@ -38,12 +38,12 @@ io.on('connection', function (socket) {
   input.on('message', function(deltaTime, message) {
     var note = [deltaTime, message];
     if (recording) {
-      song.append(note);
-      socket.emit('note', note);
+      song.push(note);
     }
     else if (replaying) {
       socket.emit('score', score.update(note));
     }
+    socket.emit('note', note);
   });
 
   socket.on('record', function(data) {

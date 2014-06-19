@@ -34,9 +34,24 @@
       var socket = io.connect('/'),
           recording = false,
           replaying = false;
+
       socket.on('ping', function(ping) {
         socket.emit('pong', true);
         console.log('Handshake completed')
+      });
+
+      socket.on('score', function(score) {
+        $('#replay').text(score * 1000);
+      });
+
+      socket.on('note', function(note) {
+        if (recording) {
+          var length = 100;
+          $('#riff').fadeOut(length, function() {
+            $(this).fadeIn(length);
+          });
+        }
+        console.log(note);
       });
 
       $('#riff').click(function() {
