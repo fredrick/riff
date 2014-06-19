@@ -2,3 +2,18 @@
 /**
  * style.css
  */
+
+body {
+  background: #A71D3A;;
+}
+
+h1 {
+  color: #EEE;
+  cursor: pointer;
+  font-family: "edoregular";
+  font-size: 8em;
+}
+
+h1:hover {
+  color: #CCC;
+}

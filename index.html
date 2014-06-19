@@ -5,30 +5,25 @@
   <meta charset="utf-8" />
   <title>Riff</title>
   <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Optional icons
   <link rel="shortcut icon" href="images/favicon.ico">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
   -->
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="fonts/font.css" />
+  <link rel="stylesheet" href="stylesheets/style.css" />
 </head>
 <body>
+  <div class="container">
+    <h1 id="riff" class="text-center">Riff</h1>
+  </div>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script>
     (function($) {
-        var socket = io.connect('/');
-
-        socket.emit('hello', true);
-        socket.on('note', function(data) {
-          console.log(data);
-        });
-
-        $(document).click(function() {
-          socket.emit('capture', true);
-          console.log('capture toggled');
-        });
+      var socket = io.connect('/');
     })(jQuery);
   </script>
 </body>
