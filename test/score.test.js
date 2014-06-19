@@ -69,6 +69,13 @@ vows.describe('Score').addBatch({
     },
     'has recorded pitch sequence': function(score) {
       assert.deepEqual(score.pitches, [40, 40]);
+    },
+    'has no score when no replayed pitches': function(score) {
+      assert.equal(score.update(), 0);
+    },
+    'updates score for recording and perfect replay': function(score) {
+      assert.equal(score.update(oneNotePlayback1[0]), 0.5);
+      assert.equal(score.update(oneNotePlayback1[1]), 1);
     }
   }
 }).export(module);
