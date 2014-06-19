@@ -62,10 +62,13 @@ var fourNotesPlayback2 = [
 ];
 
 vows.describe('Score').addBatch({
-  'when constructing': {
+  'when scoring': {
     topic: new Score(oneNote),
-    'has captured notes': function(topic) {
-      assert.deepEqual(topic.capture, oneNote);
+    'has recorded song': function(score) {
+      assert.deepEqual(score.recording, oneNote);
+    },
+    'has recorded pitch sequence': function(score) {
+      assert.deepEqual(score.pitches, [40, 40]);
     }
   }
 }).export(module);
