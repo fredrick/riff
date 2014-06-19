@@ -25,6 +25,8 @@ app.get('/song', function(req, res) {
   res.send(song);
 });
 
+input.openVirtualPort('Riff');
+
 io.on('connection', function (socket) {
   input.on('message', function(deltaTime, message) {
     var note = [deltaTime, message];
@@ -35,7 +37,7 @@ io.on('connection', function (socket) {
   });
 
   socket.on('hello', function(data) {
-    input.openVirtualPort('Riff');
+    
   });
 
   socket.on('capture', function(data) {
