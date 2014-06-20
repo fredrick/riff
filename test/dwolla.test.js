@@ -60,6 +60,18 @@ vows.describe('Dwolla').addBatch({
       assert.equal(uri, 'http://uat.dwolla.com/avatars/' + accountKey);
     },
   },
+  'when getting a balance': {
+    topic: new Dwolla(config, new RequestSpy()).balance(accessToken),
+    'requests balance with GET': function(request) {
+      assert.deepEqual(request, {
+          uri: 'http://uat.dwolla.com/oauth/rest/balance',
+          qs: {
+            oauth_token: accessToken
+          },
+          json: true
+        });
+    }
+  },
   'when getting a user': {
     topic: new Dwolla(config, new RequestSpy()).user(accessToken),
     'requests user with GET': function(request) {
