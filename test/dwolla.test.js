@@ -15,10 +15,15 @@ var config = {
 
 var code = 'code',
     accessToken = 'access_token',
-    accountKey = '812-160-3226';
+    accountKey = '812-160-3226',
+    pin = 1234,
+    amount = 1.25;
 
 function RequestSpy() {
   this.get = function(request) {
+    return request;
+  };
+  this.post = function(request) {
     return request;
   };
 }
@@ -76,12 +81,31 @@ vows.describe('Dwolla').addBatch({
     topic: new Dwolla(config, new RequestSpy()).user(accessToken),
     'requests user with GET': function(request) {
       assert.deepEqual(request, {
-          uri: 'http://uat.dwolla.com/oauth/rest/users',
-          qs: {
-            oauth_token: accessToken
-          },
-          json: true
-        });
+        uri: 'http://uat.dwolla.com/oauth/rest/users',
+        qs: {
+          oauth_token: accessToken
+        },
+        json: true
+      });
+    }
+  },
+  'when sending a transaction': {
+    topic: new Dwolla(config, new RequestSpy()).send(accessToken, {
+      pin: pin,
+      destinationId: accountKey,
+      amount: amount
+    }),
+    'requests send with POST': function(request) {
+      assert.deepEqual(request, {
+        uri: 'http://uat.dwolla.com/oauth/rest/transactions/send',
+        body: JSON.stringify({
+          pin: pin,
+          destinationId: accountKey,
+          amount: amount,
+          oauth_token: accessToken
+        }),
+        json: true
+      });
     }
   }
 }).export(module);
