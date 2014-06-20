@@ -28,6 +28,14 @@ vows.describe('Dwolla').addBatch({
     'returns OAuth permission uri': function(uri) {
       assert.equal(uri, 'http://uat.dwolla.com/oauth/v2/authenticate?client_id=key&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A9000&scope=AccountInfoFull%7CSend%7CRequest');
     },
+    'when logging out': {
+      topic: new Dwolla(config, new RequestSpy()).logout(),
+      'logs out': function(request) {
+        assert.deepEqual(request, {
+          uri: 'http://uat.dwolla.com/logout'
+        });
+      }
+    },
     'when getting a token': {
       topic: new Dwolla(config, new RequestSpy()).token(code),
       'requests token with GET': function(request) {
@@ -39,7 +47,8 @@ vows.describe('Dwolla').addBatch({
             grant_type: 'authorization_code',
             redirect_uri: config['dwolla']['redirect'],
             code: code
-          }
+          },
+          json: true
         });
       }
     }
