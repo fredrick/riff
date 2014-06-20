@@ -5,45 +5,88 @@
 
 html,
 body {
-  background: #F8235F;
   height: 100%;
 }
 
-#wrap {
-  min-height: 100%;
+.bg {
   height: auto;
-  margin: 0 auto -350px;
-  padding: 0 0 350px;
+  left: 0;
+  min-height: 100%;
+  min-width: 1024px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
+
+.background {
+  height: 50%;
+  width: 100%;
+}
+
+#header {
+  height: 50%;
+}
+
+#top {
+  background: #F8235F;
+  left: 0;
+  opacity: 0.2;
+  position: absolute;
+  top: 0;
 }
 
 #footer {
-  height: 350px;
-  background-color: #00E0B9;
+  height: 50%;
+}
+
+#bottom {
+  background: #00E0B9;
+  position: absolute;
+  opacity: 0.2;
 }
 
 h2 {
-  color: #FFF;
+  color: #F8235F;
   cursor: pointer;
   font-family: "edoregular";
   font-size: 6em;
+  text-shadow: 0px 1px 1px #000;
 }
 
 h2:hover {
-  color: #DDD;
+  opacity: 0.7;
 }
 
 h2#replay {
-  color: #852466;
+  color: #00E0B9;
 }
 
 h2:hover#replay {
-  color: #6B1D52;
+  opacity: 0.7;
+}
+
+.container {
+  position: relative;
+  z-index: 2;
 }
 
 .player {
   background: #FFF;
+  border: 1px solid #FFF;
   border-radius: 100%;
+  box-shadow: 0px 1px 1px 1px;
   height: 200px;
   width: 200px;
   margin: 20px auto;
+}
+
+#player1 {
+  background: url('/images/686px-1974_Joni_Mitchell.jpg');
+  background-position: 60% 10%;
+}
+
+#player2 {
+  background: url('/images/Chuck_Berry_Midnight_Special_1973.jpg');
+  background-position: 50% 5%;
 }
