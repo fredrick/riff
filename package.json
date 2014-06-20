@@ -7,7 +7,7 @@
     "express": ">= 4.4.x",
     "socket.io": ">= 1.0.x",
     "midi": ">= 0.8.x",
-    "gauss": "latest"
+    "request": ">= 2.36.x"
   },
   "devDependencies": {
       "vows": "latest"

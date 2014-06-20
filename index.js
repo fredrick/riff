@@ -3,7 +3,6 @@ var express = require('express'),
     server = require('http').Server(app),
     io = require('socket.io')(server),
     midi = require('midi'),
-    gauss = require('gauss'),
     Score = require('./lib/riff').Score;
 
 var song = [],
