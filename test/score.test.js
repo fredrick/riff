@@ -5,11 +5,13 @@ var Score = require('../lib/riff').Score;
 
 var oneNote = [
   [2.954706552, [144, 40, 127]],
+  [0.232245675, [128, 40, 0]],
   [0.232245675, [128, 40, 0]]
 ];
 
 var oneNotePlayback1 = [
   [4.3539790840000006, [144, 40, 127]],
+  [0.214371096, [128, 40, 0]],
   [0.214371096, [128, 40, 0]]
 ];
 
@@ -68,14 +70,15 @@ vows.describe('Score').addBatch({
       assert.deepEqual(score.recording, oneNote);
     },
     'has recorded pitch sequence': function(score) {
-      assert.deepEqual(score.pitches, [40, 40]);
+      assert.deepEqual(score.pitches, [40, 40, 40]);
     },
     'has no score when no replayed pitches': function(score) {
       assert.equal(score.update(), 0);
     },
     'updates score for recording and perfect replay': function(score) {
-      assert.equal(score.update(oneNotePlayback1[0]), 0.5);
-      assert.equal(score.update(oneNotePlayback1[1]), 1);
+      assert.equal(score.update(oneNotePlayback1[0]).toFixed(3), 0.333);
+      assert.equal(score.update(oneNotePlayback1[1]).toFixed(3), .667);
+      assert.equal(score.update(oneNotePlayback1[2]), 1);
     }
   }
 }).export(module);
