@@ -52,5 +52,17 @@ vows.describe('Dwolla').addBatch({
         });
       }
     }
+  },
+  'when getting a user': {
+    topic: new Dwolla(config, new RequestSpy()).user(access_token),
+    'requests user with GET': function(request) {
+      assert.deepEqual(request, {
+          uri: 'http://uat.dwolla.com/oauth/rest/users',
+          qs: {
+            oauth_token: access_token
+          },
+          json: true
+        });
+    }
   }
 }).export(module);
