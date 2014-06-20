@@ -13,7 +13,7 @@
       "vows": "latest"
   },
   "scripts": {
-    "start": "node index.js 9000",
+    "start": "node index.js 9000 ./config.json",
     "test": "vows test/*"
   },
   "author": "",

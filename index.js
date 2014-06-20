@@ -3,13 +3,17 @@ var express = require('express'),
     server = require('http').Server(app),
     io = require('socket.io')(server),
     midi = require('midi'),
-    Score = require('./lib/riff').Score;
+    Score = require('./lib/score')
+    Dwolla = require('./lib/dwolla');
 
 var song = [],
     score = new Score(song),
     recording = false,
     replaying = false,
-    input = new midi.input();
+    wager = 0.1,
+    input = new midi.input(),
+    config = require(process.argv[3]),
+    dwolla = new Dwolla(config);
 
 app.use("/", express.static(__dirname + '/public'));
 
