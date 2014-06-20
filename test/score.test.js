@@ -76,6 +76,20 @@ vows.describe('Score').addBatch({
     'updates score for recording and perfect replay': function(score) {
       assert.equal(score.update(oneNotePlayback1[0]), 0.5);
       assert.equal(score.update(oneNotePlayback1[1]), 1);
+    },
+    'has if replay is finished': function() {
+      var score = new Score(oneNote);
+
+      assert.isFalse(score.finished());
+
+      score.update(oneNotePlayback1[0]);
+      assert.isFalse(score.finished());
+
+      score.update(oneNotePlayback1[1]);
+      assert.isFalse(score.finished());
+
+      score.update(oneNotePlayback1[1]);
+      assert.isTrue(score.finished());
     }
   }
 }).export(module);

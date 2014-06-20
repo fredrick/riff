@@ -11,6 +11,7 @@ var song = [],
     recording = false,
     replaying = false,
     wager = 0.1,
+    players = [],
     input = new midi.input(),
     config = require(process.argv[3]),
     dwolla = new Dwolla(config);
